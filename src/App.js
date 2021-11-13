@@ -1,6 +1,9 @@
+//npm run start to start the project
+
 import { useState, useEffect } from "react";
 import SingleCard from "./components/SingleCard";
 import "./App.css";
+import Modal from "./components/Modal";
 
 //Skapa utanför komponeneten, får då laddas den aldrig om
 
@@ -19,6 +22,12 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+   //Start game automatically
+   useEffect(() => {
+    shuffleCards();
+  }, []);
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
@@ -40,10 +49,16 @@ function App() {
     }
   }, [choiceOne, choiceTwo]);
 
-  //Start game automatically
+
   useEffect(() => {
-    shuffleCards();
-  }, []);
+    function checkTrue(card) {
+      return card.matched === true;
+    }
+    
+    if (cards.every(checkTrue)) {
+      setShowModal(true);
+    }  
+  }, [cards])
 
   //Shuffle card
   const shuffleCards = () => {
@@ -69,6 +84,10 @@ function App() {
     setDisabled(false);
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="App">
       <h1>Find the pollution</h1>
@@ -85,6 +104,13 @@ function App() {
         ))}
       </div>
       <p className="turns">Turns: {turns}</p>
+      {showModal && (
+        <Modal
+          turns={turns}
+          shuffleCards={shuffleCards}
+          closeModal={closeModal}
+        ></Modal>
+      )}
     </div>
   );
 }

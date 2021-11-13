@@ -1,0 +1,25 @@
+.modalBackdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contentWrapper {
+    background: #eee;
+    padding: 1rem 2rem;
+}
+
+.modalContent {
+    font-size: 1rem;
+}
+
+.modalBtn {
+    margin: 1rem;
+}
