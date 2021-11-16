@@ -14,7 +14,12 @@ function Modal({ turns, shuffleCards, closeModal }) {
           Would you like to play again?
         </main>
         <footer>
-          <button className="modalBtn" onClick={(shuffleCards, closeModal)}>
+          <button
+            className="modalBtn"
+            onClick={() => {
+                shuffleCards();
+                closeModal();
+            }}>
             Play again
           </button>
         </footer>

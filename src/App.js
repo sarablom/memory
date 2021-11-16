@@ -48,16 +48,17 @@ function App() {
       }
     }
   }, [choiceOne, choiceTwo]);
-
-
+  
   useEffect(() => {
     function checkTrue(card) {
-      return card.matched === true;
+      return card.matched;
     }
-    
+
     if (cards.every(checkTrue)) {
       setShowModal(true);
-    }  
+    }  else {
+      setShowModal(false);
+    }
   }, [cards])
 
   //Shuffle card
